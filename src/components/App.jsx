@@ -4,23 +4,33 @@ class App extends React.Component {
 
     // RETURN TO STATE LATER
     this.state = {
-      currentVideo: props.searchYouTube()[0],
-      videoList: props.searchYouTube()
+      currentVideo: props.videos[0],
+      videoList: props.videos
     };
   }
 
   onVideoTitleClick(video) {
+    console.log('in onVideoTitleClick function');
     this.setState({
       currentVideo: video // returned by click handler on videoListEntry title (in video list)
-      // videoList: props.videos // current video will be taken out of videoList, need to re-render videoList
     });
+  }
+
+  onSearch(queryString) {
+    console.log('in onSearch function');
+    var searchCB = function(searchResults) {
+      console.log('searchCB achieved');
+      this.setState({'videoList': searchResults});
+    };
+    console.log('farther down in onSearch function');
+    searchYouTube({'query': queryString, 'key': window.YOUTUBE_API_KEY, 'max': 5}, searchCB.bind(this));
   }
 
   render() {
 
     return (
       <div>
-        <Nav />
+        <Nav onSearch={this.onSearch.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
