@@ -15,23 +15,3 @@ VideoList.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
-
-
-// LIKE THIS
-// var TodoList = (props) => (
-//   <ul>
-//     {props.todos.map(todo =>
-//       <TodoListItem todo={todo} />
-//     )}
-//   </ul>
-// );
-
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
-    // <VideoListEntry />
