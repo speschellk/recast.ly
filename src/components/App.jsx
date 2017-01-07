@@ -28,10 +28,7 @@ class App extends React.Component {
   }
 
   onType(query) {
-    console.log('in onSearch');
-    console.log('search state', this.state.search);
     this.setState({'search': query});
-    console.log('new search state', this.state.search);
   }
 
   render() {
