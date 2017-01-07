@@ -1,4 +1,4 @@
-ddescribe ('Search', function() {
+describe ('Search', function() {
   var {
     Simulate,
     renderIntoDocument,
