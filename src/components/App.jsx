@@ -5,7 +5,8 @@ class App extends React.Component {
     // RETURN TO STATE LATER
     this.state = {
       currentVideo: props.videos[0],
-      videoList: props.videos
+      videoList: props.videos,
+      search: undefined
     };
   }
 
@@ -16,21 +17,28 @@ class App extends React.Component {
     });
   }
 
-  onSearch(queryString) {
+  onSearch() {
     console.log('in onSearch function');
     var searchCB = function(searchResults) {
       console.log('searchCB achieved');
       this.setState({'videoList': searchResults});
     };
     console.log('farther down in onSearch function');
-    searchYouTube({'query': queryString, 'key': window.YOUTUBE_API_KEY, 'max': 5}, searchCB.bind(this));
+    searchYouTube({'query': this.state.search, 'key': window.YOUTUBE_API_KEY, 'max': 5}, searchCB.bind(this));
+  }
+
+  onType(query) {
+    console.log('in onSearch');
+    console.log('search state', this.state.search);
+    this.setState({'search': query});
+    console.log('new search state', this.state.search);
   }
 
   render() {
 
     return (
       <div>
-        <Nav onSearch={this.onSearch.bind(this)}/>
+        <Nav onSearch={this.onSearch.bind(this)} onType={this.onType.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
