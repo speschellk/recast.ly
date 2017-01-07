@@ -4,8 +4,8 @@ class App extends React.Component {
 
     // RETURN TO STATE LATER
     this.state = {
-      currentVideo: props.videos[0],
-      videoList: props.videos
+      currentVideo: props.searchYouTube()[0],
+      videoList: props.searchYouTube()
     };
   }
 
