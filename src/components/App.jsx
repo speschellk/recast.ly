@@ -2,7 +2,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // RETURN TO STATE LATER
     this.state = {
       currentVideo: props.videos[0],
       videoList: props.videos,
@@ -13,22 +12,27 @@ class App extends React.Component {
   onVideoTitleClick(video) {
     console.log('in onVideoTitleClick function');
     this.setState({
-      currentVideo: video // returned by click handler on videoListEntry title (in video list)
+      currentVideo: video
     });
   }
 
   onSearch() {
-    console.log('in onSearch function');
     var searchCB = function(searchResults) {
-      console.log('searchCB achieved');
       this.setState({'videoList': searchResults});
     };
-    console.log('farther down in onSearch function');
-    searchYouTube({'query': this.state.search, 'key': window.YOUTUBE_API_KEY, 'max': 5}, searchCB.bind(this));
+    this.props.searchYouTube({'query': this.state.search, 'key': window.YOUTUBE_API_KEY, 'max': 5}, searchCB.bind(this));
   }
 
   onType(query) {
+    console.log('query', query);
     this.setState({'search': query});
+  }
+
+  componentDidMount() {
+    var searchCB = function(searchResults) {
+      this.setState({'videoList': searchResults});
+    };
+    this.props.searchYouTube({'query': 'kitten ninjas', 'key': window.YOUTUBE_API_KEY, 'max': 5}, searchCB.bind(this));
   }
 
   render() {
